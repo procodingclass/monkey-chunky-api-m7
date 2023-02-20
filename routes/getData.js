@@ -36,20 +36,14 @@ const db = {
     we: { chunks: ['w', 'e'], phones: ['W', 'IY'] },
   };
 
-router.post('/', 
-body("word", "Invalid word").isLength({min:1}),
+router.get('/:word', 
 async(req,res)=>{
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        const myError = errors["errors"][0]["msg"];
-        return res.status(400).json({ errorMessage: myError });
-    }
     try{
-        const {word} = req.body;
+        const {word} = req.params;
         if(db[word]){
-            return res.status(200).json({ successMessage: db[word] });
+            return res.status(200).json({ data: db[word] });
         }else{
-            return res.status(200).json({ successMessage: "No word found" });
+            return res.status(200).json({ data: "No word found" });
         }
         
     }catch(error){
