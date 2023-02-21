@@ -45,11 +45,11 @@ async(req,res)=>{
         if(db[newWord]){
             return res.status(200).json({ data: db[newWord] });
         }else{
-            return res.status(200).json({ data: "No word found" });
+            return res.status(200).json({ data:{}, errorMessage: "Word doesn't exist in the database." });
         }
         
     }catch(error){
-        return res.status(400).json({ errorMessage: "Pass valid values" });
+        return res.status(400).json({ data:{}, errorMessage: "Word doesn't exist in the database" });
     }
 })
 
