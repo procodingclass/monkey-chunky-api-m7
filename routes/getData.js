@@ -40,8 +40,10 @@ router.get('/:word',
 async(req,res)=>{
     try{
         const {word} = req.params;
-        if(db[word]){
-            return res.status(200).json({ data: db[word] });
+        const newWord = word.toLowerCase().trim();
+        console.log(newWord)
+        if(db[newWord]){
+            return res.status(200).json({ data: db[newWord] });
         }else{
             return res.status(200).json({ data: "No word found" });
         }
@@ -52,3 +54,4 @@ async(req,res)=>{
 })
 
 module.exports = router
+
