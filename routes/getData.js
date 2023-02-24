@@ -2,6 +2,10 @@ const express = require('express')
 
 const { body, validationResult } = require("express-validator");
 const router = express.Router();
+
+const ndb = require('./localdb')
+
+/*
 const db = {
     the: { chunks: ['th', 'e'], phones: ['DH', 'AH'] },
     of: { chunks: ['o', 'f'], phones: ['AH', 'V'] },
@@ -35,15 +39,15 @@ const db = {
     was: { chunks: ['w', 'a', 's'], phones: ['W', 'AA', 'Z'] },
     we: { chunks: ['w', 'e'], phones: ['W', 'IY'] },
   };
-
+*/
 router.get('/:word', 
 async(req,res)=>{
     try{
         const {word} = req.params;
         const newWord = word.toLowerCase().trim();
         console.log(newWord)
-        if(db[newWord]){
-            return res.status(200).json({ data: db[newWord] });
+        if(ndb[newWord]){
+            return res.status(200).json({ data: ndb[newWord] });
         }else{
             return res.status(200).json({ data:{}, errorMessage: "Word doesn't exist in the database." });
         }
